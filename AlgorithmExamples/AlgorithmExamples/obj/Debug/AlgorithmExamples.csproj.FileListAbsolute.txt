@@ -1,0 +1,8 @@
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\bin\Debug\AlgorithmExamples.exe.config
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\bin\Debug\AlgorithmExamples.exe
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\bin\Debug\AlgorithmExamples.pdb
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.csproj.AssemblyReference.cache
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.csproj.SuggestedBindingRedirects.cache
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.csproj.CoreCompileInputs.cache
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.exe
+C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.pdb
