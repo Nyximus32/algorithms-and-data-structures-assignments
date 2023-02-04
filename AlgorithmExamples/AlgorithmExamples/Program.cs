@@ -54,6 +54,9 @@ namespace AlgorithmExamples
                 Console.WriteLine(mergedIntArray[i]);
             }
             Console.ReadKey();
+
+            ConstantTime(exampleStringArray);
+            LogarithmicTime(exampleStringArray, "Bulgaria");
         }
 
         //O(N)
@@ -126,6 +129,41 @@ namespace AlgorithmExamples
                 }
             }
             return inputItems;
+        }
+
+        //It's always gonna take the same amount of time to display the country
+        static void ConstantTime(string[] countries)
+        {
+            Console.WriteLine("The first county is: " + countries[0]);
+        }
+
+        //Basically a shorter version of O(n). Again, the amount of operations increases based on the amount of values, but at a much slower rate
+        static void LogarithmicTime(string[] countries, string countryToFind)
+        {
+            int low = 0;
+            int high = countries.Length - 1;
+            int mid;
+            int counter = 1;
+
+            while (low <= high)
+            {
+                mid = (low + high) / 2;
+
+                if (countries[mid].CompareTo(countryToFind) < 0)
+                {
+                    low = mid + 1;
+                }
+                else if (countries[mid].CompareTo(countryToFind) > 0)
+                {
+                    high = mid - 1;
+                }
+                else
+                {
+                    Console.WriteLine("Times searched:" + counter);
+                    return;
+                }
+                counter++;
+            }
         }
     }
 }
