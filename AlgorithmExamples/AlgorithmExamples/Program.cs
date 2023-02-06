@@ -22,8 +22,7 @@ namespace AlgorithmExamples
             "Italy",
             "Portugal",
             "Norway",
-            "Sweden",
-            "Iceland"
+            "Sweden"
         };
 
         static int[] exampleIntArray =
@@ -53,10 +52,11 @@ namespace AlgorithmExamples
             {
                 Console.WriteLine(mergedIntArray[i]);
             }
-            Console.ReadKey();
+            //Console.ReadKey();
 
             ConstantTime(exampleStringArray);
-            LogarithmicTime(exampleStringArray, "Bulgaria");
+            LogarithmicTime(exampleStringArray, "Sweden");
+            QuadraticTime(exampleIntArray);
         }
 
         //O(N)
@@ -165,5 +165,27 @@ namespace AlgorithmExamples
                 counter++;
             }
         }
+        //For every element in the array we go trough the enire array, so basically O(n)*O(n) = O(n^2)
+        public static void QuadraticTime(int[] numbers)
+        {
+            int n = numbers.Length;
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (numbers[j] > numbers[j + 1])
+                    {
+                        int temp = numbers[j];
+                        numbers[j] = numbers[j + 1];
+                        numbers[j + 1] = temp;
+                    }
+                }
+            }
+            foreach(int number in numbers)
+            {
+                Console.Write(number + " ");
+            }
+        }
+
     }
 }

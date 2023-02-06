@@ -6,3 +6,11 @@ C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\Algorithm
 C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.csproj.CoreCompileInputs.cache
 C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.exe
 C:\Users\dimit\Source\Repos\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.pdb
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\bin\Debug\AlgorithmExamples.exe.config
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\bin\Debug\AlgorithmExamples.exe
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\bin\Debug\AlgorithmExamples.pdb
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.csproj.AssemblyReference.cache
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.csproj.SuggestedBindingRedirects.cache
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.csproj.CoreCompileInputs.cache
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.exe
+C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\AlgorithmExamples\AlgorithmExamples\obj\Debug\AlgorithmExamples.pdb
