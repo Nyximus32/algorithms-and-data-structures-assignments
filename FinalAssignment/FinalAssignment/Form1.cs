@@ -20,13 +20,21 @@ namespace FinalAssignment
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {/*
             var path = "animeList.json";
             List<Anime> animes = LoadJson(path);
             foreach (var anime in animes)
             {
                 richTextBox1.Text += anime.Title + '\n';
             }
+            */
+            StackBetter<string> animes1 = new StackBetter<string>();
+            animes1.Push("asdas");
+            animes1.Push("wasda");
+            animes1.Push("sdasa");
+            animes1.Push("asmas");
+            animes1.Pop();
+            richTextBox1.Text = animes1.Peek().ToString();
         }
 
         public static List<Anime> LoadJson(string path)
