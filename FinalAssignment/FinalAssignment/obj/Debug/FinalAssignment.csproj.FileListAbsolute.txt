@@ -12,3 +12,17 @@ C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\FinalAssignment\F
 C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csproj.CopyComplete
 C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.exe
 C:\MainStuff\Uni\C#\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.pdb
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\bin\Debug\FinalAssignment.exe.config
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\bin\Debug\FinalAssignment.exe
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\bin\Debug\FinalAssignment.pdb
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\bin\Debug\Newtonsoft.Json.dll
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\bin\Debug\Newtonsoft.Json.xml
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csproj.AssemblyReference.cache
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csproj.SuggestedBindingRedirects.cache
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.Form1.resources
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.Properties.Resources.resources
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csproj.GenerateResource.cache
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csproj.CoreCompileInputs.cache
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csproj.CopyComplete
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.exe
+C:\Users\dimit\source\repos\algorithms-and-data-structures-assignments\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.pdb

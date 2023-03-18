@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoolerArrayList.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -25,7 +25,13 @@ namespace FinalAssignment
             List<Anime> animes = LoadJson(path);
             foreach (var anime in animes)
             {
-                richTextBox1.Text += anime.Title + '\n';
+                animeArrayList.Add(anime);
+                //richTextBox1.Text += anime.Title + '\n';
+            }
+
+            for (int i = 0; i < animeArrayList.Count(); i++) 
+            {
+                richTextBox1.Text += animeArrayList[i].Title + '\n';
             }
             */
             StackBetter<string> animes1 = new StackBetter<string>();
