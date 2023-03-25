@@ -53,7 +53,7 @@ namespace FinalAssignment
                     case "Winter":
                         xSeason = 1;
                         break;
-                    case "Spring";
+                    case "Spring":
                         xSeason = 2;
                         break;
                     case "Summer":
@@ -72,7 +72,7 @@ namespace FinalAssignment
                     case "Winter":
                         ySeason = 1;
                         break;
-                    case "Spring";
+                    case "Spring":
                         ySeason = 2;
                         break;
                     case "Summer":

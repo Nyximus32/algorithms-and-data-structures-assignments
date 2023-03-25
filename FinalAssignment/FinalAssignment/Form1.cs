@@ -21,32 +21,28 @@ namespace FinalAssignment
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            SortDeez<Anime> sortDeez = new SortDeez<Anime>();
+            Func<Anime, IComparable> sortByName = (anime) => anime.Episodes;
             var path = "animeList.json";
-            List<Anime> animeArrayList = LoadJson(path);
-            foreach (var anime in animeArrayList)
+            StackBetter<Anime> animeStack = LoadJson(path);
+            sortDeez.BubbleSort(animeStack, sortByName);
+            for (int i = 0; i < animeStack.Count; i++)
             {
-                animeArrayList.Add(anime);
-                //richTextBox1.Text += anime.Title + '\n';
+                Console.WriteLine(animeStack.Pop().Title);
             }
-
-            for (int i = 0; i < animeArrayList.Count(); i++) 
-            {
-                richTextBox1.Text += animeArrayList[i].Title + '\n';
-            }
-            /*
-            StackBetter<string> animes1 = new StackBetter<string>();
+            /*StackBetter<string> animes1 = new StackBetter<string>();
             animes1.Push("asdas");
             animes1.Push("wasda");
             animes1.Push("sdasa");
             animes1.Push("asmas");
-            animes1.Pop();
-            richTextBox1.Text = animes1.Peek().ToString();
-            */
+            animes1.Pop();*/
+            //animes1.BubbleSort(sortByName);
+
         }
 
-        public static List<Anime> LoadJson(string path)
+        public static StackBetter<Anime> LoadJson(string path)
         {
-            List<Anime> animes = new List<Anime>();
+            StackBetter<Anime> animes = new StackBetter<Anime>();
             dynamic items;
             using (StreamReader r = new StreamReader(path))
             {
@@ -78,7 +74,7 @@ namespace FinalAssignment
                 anime.Sequel = item.Sequel;
                 anime.Prequel = item.Prequel;
                 anime.Characters = item.Characters;
-                animes.Add(anime);
+                animes.Push(anime);
             }
             return animes;
         }

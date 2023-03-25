@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalAssignment
 {
-    internal class StackBetter<T>
+    public class StackBetter<T>
     {
         private T[] _array;
         private int _size;
@@ -15,6 +15,11 @@ namespace FinalAssignment
         {
             _array = new T[10];
             _size = 0;
+        }
+
+        public int Count
+        {
+            get { return _size; }
         }
 
         public void Push(T value)
@@ -46,19 +51,6 @@ namespace FinalAssignment
             T result = _array[--_size];
             _array[_size] = default;
             return result;
-        }
-
-        public T Peek(int index)
-        {
-            if (_size == 0)
-            {
-                throw new InvalidOperationException("Stack is empty");
-            }
-            else if (index > _size)
-            {
-                throw new InvalidOperationException("Doesn't exist");
-            }
-            return _array[index - 1];
         }
 
         public T Peek()
