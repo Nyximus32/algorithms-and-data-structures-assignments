@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinalAssignment
 {
-    public class CoolerArrayList<T>
+    public class CoolerArrayList<T> : ICollection<T>
     {
         private Object[] items;
         private int size;
@@ -29,14 +29,14 @@ namespace FinalAssignment
         }
 
         //adds an item to the array
-        public int Add(T item)
+        public void Add(T item)
         {
             if(size == items.Length)
             {
                 EnsureCapacity(size + 1);
             }
             items[size] = item;
-            return size++;
+            size++;
         }
 
         //makes sure that when something is added that there is enough space for it in the list
@@ -100,6 +100,10 @@ namespace FinalAssignment
             }
         }
 
+        int ICollection<T>.Count { get { return size; } }
+
+        public bool IsReadOnly { get { return false; } }
+
         //finds the index of the first occurence of a value
         public int IndexOf(T value)
         {
@@ -126,14 +130,65 @@ namespace FinalAssignment
             items[size] = null;
         }
 
+        public void Clear()
+        {
+            items = null;
+            size = 0;
+        }
+
+        public bool Contains(T item)
+        {
+            if (item == null)
+            {
+                //looks for the first null value and if it finds one return true else false
+                for(int i = 0; i < size; i++)
+                    if (items[i] == null)
+                    {
+                        return true;
+                    }
+                return false;
+            } else
+            {
+                //looks for value and checks if they are equal if true return true else false
+                for(int i = 0; i < size; i++)
+                    if((items[i] != null) && (items[i].Equals(item)))
+                    {
+                        return true;
+                    }
+                return false;
+            }
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            if((array != null) && (array.Rank != 1))
+            {
+                throw new ArgumentException("array is empty or has more than 1 dimension");
+            }
+            //copies array list into array of compatible type
+            Array.Copy(items, 0, array, arrayIndex, size);
+        }
+
         //removes the object by finding its index and removing that index
-        public void Remove(T item)
+        bool ICollection<T>.Remove(T item)
         {
             int index = IndexOf(item);
-            if(index >= 0)
+            if (index >= 0)
             {
                 RemoveAt(index);
+                return true;
             }
+            return false;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
         public T this[int index]

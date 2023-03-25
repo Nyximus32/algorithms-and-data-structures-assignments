@@ -20,10 +20,10 @@ namespace FinalAssignment
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {/*
+        {
             var path = "animeList.json";
-            List<Anime> animes = LoadJson(path);
-            foreach (var anime in animes)
+            List<Anime> animeArrayList = LoadJson(path);
+            foreach (var anime in animeArrayList)
             {
                 animeArrayList.Add(anime);
                 //richTextBox1.Text += anime.Title + '\n';
@@ -33,7 +33,7 @@ namespace FinalAssignment
             {
                 richTextBox1.Text += animeArrayList[i].Title + '\n';
             }
-            */
+            /*
             StackBetter<string> animes1 = new StackBetter<string>();
             animes1.Push("asdas");
             animes1.Push("wasda");
@@ -41,6 +41,7 @@ namespace FinalAssignment
             animes1.Push("asmas");
             animes1.Pop();
             richTextBox1.Text = animes1.Peek().ToString();
+            */
         }
 
         public static List<Anime> LoadJson(string path)
@@ -80,31 +81,6 @@ namespace FinalAssignment
                 animes.Add(anime);
             }
             return animes;
-        }
-        public class Anime
-        {
-            public string Title;
-            public string Link;
-            public double Score;
-            public string Type;
-            public int Episodes;
-            public string Source;
-            public string Premiered;
-            public string AiredDate;
-            public string Studios;
-            public string Genres;
-            public string Themes;
-            public string Demographic;
-            public string Duration;
-            public string AgeRating;
-            public double ReviewCount;
-            public int Popularity;
-            public string Members;
-            public string Favorites;
-            public string Adaptation;
-            public string Sequel;
-            public string Prequel;
-            public string Characters;
         }
     }
 }
