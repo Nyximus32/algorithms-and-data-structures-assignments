@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static FinalAssignment.Anime;
+=======
+>>>>>>> 724e506412fef716600601e37240cb06843a875a
 
 namespace FinalAssignment
 {

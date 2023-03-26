@@ -34,6 +34,7 @@ namespace FinalAssignment
             sortDeez.BubbleSort(animeStack, sortByReleaseDate);
             for (int i = 0; i < animeStack.Count; i++)
             {
+<<<<<<< HEAD
                 richTextBox1.Text += animeStack[i].Title + "\n";
             };
         }
@@ -41,6 +42,14 @@ namespace FinalAssignment
         public static CoolerArrayList<Anime> ArrayListLoadJson(string path)
         {
             CoolerArrayList<Anime> animes = new CoolerArrayList<Anime>();
+=======
+                richTextBox1.Text += animeStack.Pop().Title + Environment.NewLine;
+            }
+        }
+
+        public void LoadJson(string path)
+        {
+>>>>>>> 724e506412fef716600601e37240cb06843a875a
             dynamic items;
             using (StreamReader r = new StreamReader(path))
             {
@@ -49,6 +58,7 @@ namespace FinalAssignment
             }
             foreach (dynamic item in items)
             {
+<<<<<<< HEAD
                 Anime anime = new Anime();
                 anime.Title = item.Title;
                 anime.Link = item.Link;
@@ -73,8 +83,36 @@ namespace FinalAssignment
                 anime.Prequel = item.Prequel;
                 anime.Characters = item.Characters;
                 animes.Add(anime);
+=======
+                Anime anime = new Anime
+                {
+                    Title = item.Title,
+                    Link = item.Link,
+                    Score = item.Score,
+                    Type = item.Type,
+                    Episodes = item.Episodes,
+                    Source = item.Source,
+                    Premiered = item.Premiered,
+                    Studios = item.Studios,
+                    Genres = item.Genres,
+                    Themes = item.Themes,
+                    Demographic = item.Demographic,
+                    Duration = item.Duration,
+                    AgeRating = item.AgeRating,
+                    ReviewCount = item.ReviewCount,
+                    Popularity = item.Popularity,
+                    Members = item.Members,
+                    Favorites = item.Favorites,
+                    Adaptation = item.Adaptation,
+                    Sequel = item.Sequel,
+                    Prequel = item.Prequel,
+                    Characters = item.Characters
+                };
+                anime.FixAiredDate(item.AiredDate.ToString());
+                animeStack.Push(anime);
+                animeArrayList.Add(anime);
+>>>>>>> 724e506412fef716600601e37240cb06843a875a
             }
-            return animes;
         }
 
         public static StackBetter<Anime> StackLoadJson(string path)
