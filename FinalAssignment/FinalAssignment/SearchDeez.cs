@@ -9,7 +9,7 @@ namespace FinalAssignment
     internal class SearchDeez
     {
         public SearchDeez() { }
-
+        
         public Anime SearchFor(CoolerArrayList<Anime> arrayList, string title)
         {
             for(int i = 0; i <= arrayList.Count(); i++)

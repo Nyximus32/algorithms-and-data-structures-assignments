@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Timers;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +16,6 @@ namespace FinalAssignment
 {
     public partial class Form1 : Form
     {
-        private static System.Timers.Timer aTimer;
         public Form1()
         {
             InitializeComponent();
@@ -74,31 +73,32 @@ namespace FinalAssignment
             }
         }
 
-        private static void SetTimer()
-        {
-        // Create a timer with a two second interval.
-        aTimer = new System.Timers.Timer(2000);
-        // Hook up the Elapsed event for the timer. 
-        aTimer.AutoReset = true;
-        aTimer.Enabled = true;
-        }
-
         private void displayArrList_Click(object sender, EventArgs e)
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             richTextBox1.Text = "";
             for (int i = 0; i < animeArrayList.Count(); i++)
             {
                 richTextBox1.Text += animeArrayList[i].Title + "\n";
             }
+            stopwatch.Stop();
+            long elapsed_time = stopwatch.ElapsedMilliseconds;
+            label2.Text = elapsed_time.ToString() + " miliseconds";
         }
 
         private void dispayStack_Click(object sender, EventArgs e)
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             richTextBox1.Text = "";
             while (animeStack.Count > 0)
             {
                 richTextBox1.Text += animeStack.Pop().Title + "\n";
             }
+            stopwatch.Stop();
+            long elapsed_time = stopwatch.ElapsedMilliseconds;
+            label2.Text = elapsed_time.ToString() + " miliseconds";
         }
     }
 }
