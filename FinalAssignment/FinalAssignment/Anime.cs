@@ -15,7 +15,7 @@ namespace FinalAssignment
         public int Episodes;
         public string Source;
         public string Premiered; //might need a struct //
-        public string AiredDate;
+        public DateTime AiredDate;
         public string Studios;
         public string Genres;
         public string Themes;
@@ -31,96 +31,21 @@ namespace FinalAssignment
         public string Prequel;
         public string Characters;
 
-        //Compares the premiered anime with eachother returns whichever is the later date
-        public class AnimePremieredComparer : IComparer<Anime>
+
+        public void FixAiredDate(string aired)
         {
-            public int Compare(Anime x, Anime y)
+            string actualAired = aired;
+            if(aired.Length > 15)
             {
-                //check if any is null beforehand
-                if(x.Premiered == null && y.Premiered == null)
-                {
-                    return 0;
-                } else if(x.Premiered == null && y.Premiered != null) 
-                {
-                    return -1;
-                } else if(x.Premiered != null && y.Premiered == null)
-                {
-                    return 1;
-                }
-
-                string[] xPremiered = x.Premiered.Split(' ');
-                string[] yPremiered = y.Premiered.Split(' ');
-
-                //seasons
-                int xSeason = 0;
-                int ySeason = 0;
-
-                //years
-                int xYear = int.Parse(xPremiered[1]);
-                int yYear = int.Parse(yPremiered[1]);
-
-                //gives a number for each season for x and y
-                switch (xPremiered[0])
-                {
-                    case "Winter":
-                        xSeason = 1;
-                        break;
-                    case "Spring":
-                        xSeason = 2;
-                        break;
-                    case "Summer":
-                        xSeason = 3;
-                        break;
-                    case "Fall":
-                        xSeason = 4;
-                        break;
-                    default:
-                        xSeason = 0;
-                        break;
-                }
-
-                switch (yPremiered[0])
-                {
-                    case "Winter":
-                        ySeason = 1;
-                        break;
-                    case "Spring":
-                        ySeason = 2;
-                        break;
-                    case "Summer":
-                        ySeason = 3;
-                        break;
-                    case "Fall":
-                        ySeason = 4;
-                        break;
-                    default:
-                        ySeason = 0;
-                        break;
-                }
-
-                //if years are equal
-                if (xYear == yYear)
-                {
-                    //check to see which season comes first
-                    if(xSeason > ySeason)
-                    {
-                        return 1;
-                    } else if (xSeason < ySeason)
-                    {
-                        return -1;
-                    } else
-                    {
-                        return 0;
-                    }
-                } else if (xYear > yYear)
-                {
-                    return 1;
-                } else
-                {
-                    return -1;
-                }
+                actualAired = aired.Split(new string[] { "to" }, StringSplitOptions.None)[0];
             }
+
+            AiredDate = DateTime.Parse(actualAired);
         }
+        //Compares the premiered anime with eachother returns whichever is the later date
+        
+
+        
 
         public int CompareTo(Anime other)
         {

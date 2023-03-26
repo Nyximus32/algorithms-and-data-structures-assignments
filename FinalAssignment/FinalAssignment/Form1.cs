@@ -21,14 +21,18 @@ namespace FinalAssignment
         {
             InitializeComponent();
         }
+        StackBetter<Anime> animeStack = new StackBetter<Anime>();
+        CoolerArrayList<Anime> animeArrayList = new CoolerArrayList<Anime>();
 
         private void Form1_Load(object sender, EventArgs e)
         {
             SortDeez<Anime> sortDeez = new SortDeez<Anime>();
-            Func<Anime, IComparable> sortByEpisodes = (anime) => anime.Episodes;
-            var path = "animeList.json";
-            CoolerArrayList<Anime> animeStack = ArrayListLoadJson(path);
-            for (int i = 0; i < animeStack.Count(); i++)
+            Func<Anime, IComparable> sortByEpisodeCount = (anime) => anime.Episodes;
+            Func<Anime, IComparable> sortByReleaseDate = (anime) => anime.AiredDate;
+            Func<Anime, IComparable> sortByTitle = (anime) => anime.Title;
+            LoadJson("animeList.json");
+            sortDeez.BubbleSort(animeStack, sortByReleaseDate);
+            for (int i = 0; i < animeStack.Count; i++)
             {
                 richTextBox1.Text += animeStack[i].Title + "\n";
             };
@@ -74,8 +78,8 @@ namespace FinalAssignment
         }
 
         public static StackBetter<Anime> StackLoadJson(string path)
+        public void LoadJson(string path)
         {
-            StackBetter<Anime> animes = new StackBetter<Anime>();
             dynamic items;
             using (StreamReader r = new StreamReader(path))
             {
@@ -84,32 +88,34 @@ namespace FinalAssignment
             }
             foreach (dynamic item in items)
             {
-                Anime anime = new Anime();
-                anime.Title = item.Title;
-                anime.Link = item.Link;
-                anime.Score = item.Score;
-                anime.Type = item.Type;
-                anime.Episodes = item.Episodes;
-                anime.Source = item.Source;
-                anime.Premiered = item.Premiered;
-                anime.AiredDate = item.AiredDate;
-                anime.Studios = item.Studios;
-                anime.Genres = item.Genres;
-                anime.Themes = item.Themes;
-                anime.Demographic = item.Demographic;
-                anime.Duration = item.Duration;
-                anime.AgeRating = item.AgeRating;
-                anime.ReviewCount = item.ReviewCount;
-                anime.Popularity = item.Popularity;
-                anime.Members = item.Members;
-                anime.Favorites = item.Favorites;
-                anime.Adaptation = item.Adaptation;
-                anime.Sequel = item.Sequel;
-                anime.Prequel = item.Prequel;
-                anime.Characters = item.Characters;
-                animes.Push(anime);
+                Anime anime = new Anime
+                {
+                    Title = item.Title,
+                    Link = item.Link,
+                    Score = item.Score,
+                    Type = item.Type,
+                    Episodes = item.Episodes,
+                    Source = item.Source,
+                    Premiered = item.Premiered,
+                    Studios = item.Studios,
+                    Genres = item.Genres,
+                    Themes = item.Themes,
+                    Demographic = item.Demographic,
+                    Duration = item.Duration,
+                    AgeRating = item.AgeRating,
+                    ReviewCount = item.ReviewCount,
+                    Popularity = item.Popularity,
+                    Members = item.Members,
+                    Favorites = item.Favorites,
+                    Adaptation = item.Adaptation,
+                    Sequel = item.Sequel,
+                    Prequel = item.Prequel,
+                    Characters = item.Characters
+                };
+                anime.FixAiredDate(item.AiredDate.ToString());
+                animeStack.Push(anime);
+                animeArrayList.Add(anime);
             }
-            return animes;
         }
 
         private static void SetTimer()
