@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static FinalAssignment.Anime;
-=======
->>>>>>> 724e506412fef716600601e37240cb06843a875a
 
 namespace FinalAssignment
 {
@@ -30,25 +27,24 @@ namespace FinalAssignment
             }
         }
 
-        public void QuickSort(CoolerArrayList<Anime> array, int lowIndex, int highIndex)
+        public void QuickSort(CoolerArrayList<T> array, int lowIndex, int highIndex, Func<T, IComparable> propertySelector)
         {
             if(lowIndex < highIndex)
             {
-                int pi = Partition(array, lowIndex, highIndex);
-                QuickSort(array, lowIndex, pi - 1);
-                QuickSort(array, pi + 1, highIndex);
+                int pi = Partition(array, lowIndex, highIndex, propertySelector);
+                QuickSort(array, lowIndex, pi - 1, propertySelector);
+                QuickSort(array, pi + 1, highIndex, propertySelector);
             }
         }
 
-        private int Partition(CoolerArrayList<Anime> array, int lowIndex, int highIndex)
+        private int Partition(CoolerArrayList<T> array, int lowIndex, int highIndex, Func<T, IComparable> propertySelector)
         {
             var pivot = array[highIndex];
             int i = (lowIndex - 1);
 
             for(int j = lowIndex; j <= highIndex; j++)
             {
-                AnimePremieredComparer comparer = new AnimePremieredComparer();
-                if (comparer.Compare(array[j], pivot) < 0)
+                if (propertySelector(array[j]).CompareTo(propertySelector(pivot)) < 0)
                 {
                     i++;
                     var bufferJ = array[j];
