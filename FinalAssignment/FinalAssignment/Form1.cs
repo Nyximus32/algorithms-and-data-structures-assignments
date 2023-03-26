@@ -32,11 +32,7 @@ namespace FinalAssignment
             Func<Anime, IComparable> sortByTitle = (anime) => anime.Title;
             LoadJson("animeList.json");
             //sortDeez.BubbleSort(animeStack, sortByReleaseDate);
-            sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
-            for (int i = 0; i < animeArrayList.Count(); i++)
-            {
-                richTextBox1.Text += animeArrayList[i].Title + "\n";
-            };
+            //sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
         }
         public void LoadJson(string path)
         {
@@ -87,5 +83,22 @@ namespace FinalAssignment
         aTimer.Enabled = true;
         }
 
+        private void displayArrList_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+            for (int i = 0; i < animeArrayList.Count(); i++)
+            {
+                richTextBox1.Text += animeArrayList[i].Title + "\n";
+            }
+        }
+
+        private void dispayStack_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+            while (animeStack.Count > 0)
+            {
+                richTextBox1.Text += animeStack.Pop().Title + "\n";
+            }
+        }
     }
 }

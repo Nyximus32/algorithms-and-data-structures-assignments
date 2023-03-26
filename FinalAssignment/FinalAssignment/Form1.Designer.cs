@@ -29,24 +29,48 @@
         private void InitializeComponent()
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.dispayStack = new System.Windows.Forms.Button();
+            this.displayArrList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(38, 68);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBox1.Location = new System.Drawing.Point(51, 84);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(219, 226);
+            this.richTextBox1.Size = new System.Drawing.Size(291, 277);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
+            // dispayStack
+            // 
+            this.dispayStack.Location = new System.Drawing.Point(51, 379);
+            this.dispayStack.Name = "dispayStack";
+            this.dispayStack.Size = new System.Drawing.Size(120, 43);
+            this.dispayStack.TabIndex = 1;
+            this.dispayStack.Text = "Display stack";
+            this.dispayStack.UseVisualStyleBackColor = true;
+            this.dispayStack.Click += new System.EventHandler(this.dispayStack_Click);
+            // 
+            // displayArrList
+            // 
+            this.displayArrList.Location = new System.Drawing.Point(222, 379);
+            this.displayArrList.Name = "displayArrList";
+            this.displayArrList.Size = new System.Drawing.Size(120, 43);
+            this.displayArrList.TabIndex = 2;
+            this.displayArrList.Text = "Display arraylist";
+            this.displayArrList.UseVisualStyleBackColor = true;
+            this.displayArrList.Click += new System.EventHandler(this.displayArrList_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.displayArrList);
+            this.Controls.Add(this.dispayStack);
             this.Controls.Add(this.richTextBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -57,6 +81,8 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button dispayStack;
+        private System.Windows.Forms.Button displayArrList;
     }
 }
 

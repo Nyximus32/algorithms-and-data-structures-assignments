@@ -43,8 +43,6 @@ namespace FinalAssignment
         {
             Node current = _head;
 
-
-
             Node[] update = new Node[21];
 
             for (int i = _levels; i >= 0; i--)
