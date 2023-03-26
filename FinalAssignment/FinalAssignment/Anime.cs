@@ -32,10 +32,22 @@ namespace FinalAssignment
         public string Characters;
 
         //Compares the premiered anime with eachother returns whichever is the later date
-        private class AnimePremieredComparer : IComparer<Anime>
+        public class AnimePremieredComparer : IComparer<Anime>
         {
             public int Compare(Anime x, Anime y)
             {
+                //check if any is null beforehand
+                if(x.Premiered == null && y.Premiered == null)
+                {
+                    return 0;
+                } else if(x.Premiered == null && y.Premiered != null) 
+                {
+                    return -1;
+                } else if(x.Premiered != null && y.Premiered == null)
+                {
+                    return 1;
+                }
+
                 string[] xPremiered = x.Premiered.Split(' ');
                 string[] yPremiered = y.Premiered.Split(' ');
 
