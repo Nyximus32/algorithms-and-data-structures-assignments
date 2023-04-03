@@ -26,12 +26,15 @@ namespace FinalAssignment
         private void Form1_Load(object sender, EventArgs e)
         {
             SortDeez<Anime> sortDeez = new SortDeez<Anime>();
+            SearchDeez<Anime> searchDeez = new SearchDeez<Anime>();
             Func<Anime, IComparable> sortByEpisodeCount = (anime) => anime.Episodes;
             Func<Anime, IComparable> sortByReleaseDate = (anime) => anime.AiredDate;
             Func<Anime, IComparable> sortByTitle = (anime) => anime.Title;
             LoadJson("animeList.json");
             //sortDeez.BubbleSort(animeStack, sortByReleaseDate);
             //sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
+            //sortDeez.BubbleSort(animeArrayList, sortByTitle);
+            searchDeez.binarySearch(arrayList, 0, arrayList.Count(), )
         }
         public void LoadJson(string path)
         {

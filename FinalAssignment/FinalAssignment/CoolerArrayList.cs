@@ -199,7 +199,7 @@ namespace FinalAssignment
             }
             set
             {
-                throw new NotSupportedException("cannot set index");
+                items[index] = value;
             }
         }
 

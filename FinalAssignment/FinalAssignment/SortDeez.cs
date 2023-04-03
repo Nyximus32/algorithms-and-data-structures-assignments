@@ -9,6 +9,7 @@ namespace FinalAssignment
 {
     internal class SortDeez<T>
     {
+        //BUBBLE SORT STACKS
         public void BubbleSort(StackBetter<T> stack, Func<T, IComparable> propertySelector)
         {
             Stack<T> tempStack = new Stack<T>();
@@ -27,14 +28,57 @@ namespace FinalAssignment
             }
         }
 
-        public void QuickSort(CoolerArrayList<T> array, int lowIndex, int highIndex, Func<T, IComparable> propertySelector)
+        //BUBBLE SORT ARRAYLIST
+        public void BubbleSort(CoolerArrayList<T> array, Func<T, IComparable> propertySelector)
         {
-            if(lowIndex < highIndex)
+            int num = array.Count();
+            for (int i = 0; i < num - 1; i++)
+                for (int j = 0; j < num - i - 1; j++)
+                    if (propertySelector(array[j]).CompareTo(propertySelector(array[j + 1])) > 0)
+                    {
+                        // swap temp and array[i]
+                        T temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
+        }
+
+        //QUICKSORT ARRAYLIST
+        public CoolerArrayList<T> QuickSort(CoolerArrayList<T> array, int leftIndex, int rightIndex, Func<T, IComparable> propertySelector)
+        {
+            var i = leftIndex;
+            var j = rightIndex;
+            var pivot = array[leftIndex];
+
+            while (i <= j)
             {
-                int pi = Partition(array, lowIndex, highIndex, propertySelector);
-                QuickSort(array, lowIndex, pi - 1, propertySelector);
-                QuickSort(array, pi + 1, highIndex, propertySelector);
+                while (propertySelector(array[i]).CompareTo(propertySelector(pivot)) < 0)
+                {
+                    i++;
+                }
+
+                while (propertySelector(array[j]).CompareTo(propertySelector(pivot)) > 0)
+                {
+                    j--;
+                }
+
+                if (i <= j)
+                {
+                    T temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                    i++;
+                    j--;
+                }
             }
+
+            if (leftIndex < j)
+                QuickSort(array, leftIndex, j, propertySelector);
+
+            if (i < rightIndex)
+                QuickSort(array, i, rightIndex, propertySelector);
+
+            return array;
         }
 
         private int Partition(CoolerArrayList<T> array, int lowIndex, int highIndex, Func<T, IComparable> propertySelector)
