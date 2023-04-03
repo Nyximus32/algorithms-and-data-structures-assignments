@@ -24,7 +24,7 @@ namespace FinalAssignment
         }
         StackBetter<Anime> animeStack = new StackBetter<Anime>();
         CoolerArrayList<Anime> animeArrayList = new CoolerArrayList<Anime>();
-        SearchDeez searchDeez = new SearchDeez();
+        SearchDeez<Anime> searchDeez = new SearchDeez<Anime>();
         SortDeez<Anime> sortDeez = new SortDeez<Anime>();
         Func<Anime, IComparable> sortByEpisodeCount = (anime) => anime.Episodes;
         Func<Anime, IComparable> sortByReleaseDate = (anime) => anime.AiredDate;
@@ -32,12 +32,15 @@ namespace FinalAssignment
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Anime testAnime = new Anime();
+            testAnime.Title = "Mushishi";
             LoadJson("animeList.json");
             sortDeez.BubbleSort(animeStack, sortByEpisodeCount);
+            animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByTitle);
             //Anime animee = searchDeez.SearchFor<Anime>(animeArrayList, "Bleach", sortByTitle);
             //sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
             //sortDeez.BubbleSort(animeArrayList, sortByTitle);
-            searchDeez.binarySearch(arrayList, 0, arrayList.Count(), )
+            string index = (searchDeez.binarySearch(animeArrayList, 0, animeArrayList.Count(), testAnime, sortByTitle)).ToString();
         }
         public void LoadJson(string path)
         {

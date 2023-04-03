@@ -34,7 +34,7 @@ namespace FinalAssignment
             int num = array.Count();
             for (int i = 0; i < num - 1; i++)
                 for (int j = 0; j < num - i - 1; j++)
-                    if (propertySelector(array[j]).CompareTo(propertySelector(array[j + 1])) > 0)
+                    if (propertySelector(array[j]).CompareTo(propertySelector(array[j + 1])) > 0)   
                     {
                         // swap temp and array[i]
                         T temp = array[j];
