@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FinalAssignment
 {
@@ -22,16 +24,17 @@ namespace FinalAssignment
         }
         StackBetter<Anime> animeStack = new StackBetter<Anime>();
         CoolerArrayList<Anime> animeArrayList = new CoolerArrayList<Anime>();
+        SearchDeez searchDeez = new SearchDeez();
+        SortDeez<Anime> sortDeez = new SortDeez<Anime>();
+        Func<Anime, IComparable> sortByEpisodeCount = (anime) => anime.Episodes;
+        Func<Anime, IComparable> sortByReleaseDate = (anime) => anime.AiredDate;
+        Func<Anime, IComparable> sortByTitle = (anime) => anime.Title;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SortDeez<Anime> sortDeez = new SortDeez<Anime>();
-            SearchDeez<Anime> searchDeez = new SearchDeez<Anime>();
-            Func<Anime, IComparable> sortByEpisodeCount = (anime) => anime.Episodes;
-            Func<Anime, IComparable> sortByReleaseDate = (anime) => anime.AiredDate;
-            Func<Anime, IComparable> sortByTitle = (anime) => anime.Title;
             LoadJson("animeList.json");
-            //sortDeez.BubbleSort(animeStack, sortByReleaseDate);
+            sortDeez.BubbleSort(animeStack, sortByEpisodeCount);
+            //Anime animee = searchDeez.SearchFor<Anime>(animeArrayList, "Bleach", sortByTitle);
             //sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
             //sortDeez.BubbleSort(animeArrayList, sortByTitle);
             searchDeez.binarySearch(arrayList, 0, arrayList.Count(), )
@@ -102,6 +105,38 @@ namespace FinalAssignment
             stopwatch.Stop();
             long elapsed_time = stopwatch.ElapsedMilliseconds;
             label2.Text = elapsed_time.ToString() + " miliseconds";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string searchfor = groupBox1.Controls.OfType<System.Windows.Forms.RadioButton>().FirstOrDefault(r => r.Checked).Text;
+            if (searchfor.Equals("Title"))
+            {
+                Anime animeToCheck = new Anime { Title = textBox1.Text };
+                Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByTitle);
+                if (foundAnime != null)
+                {
+                    richTextBox1.Text = foundAnime.Title;
+                }
+            }
+            else if (searchfor.Equals("Episode count"))
+            {
+                Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
+                Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByEpisodeCount);
+                if (foundAnime != null)
+                {
+                    richTextBox1.Text = foundAnime.Title;
+                }
+            }
+            else if (searchfor.Equals("Release date"))
+            {
+                Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
+                Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByReleaseDate);
+                if (foundAnime != null)
+                {
+                    richTextBox1.Text = foundAnime.Title;
+                }
+            }
         }
     }
 }
