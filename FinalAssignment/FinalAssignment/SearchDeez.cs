@@ -50,18 +50,18 @@ namespace FinalAssignment
             return default;
         }
 
-
-        public Anime SearchFor(StackBetter<Anime> stack, string title)
+        
+        public T SearchFor<T>(StackBetter<T> stack, T searchable, Func<T, IComparable> propertySelector)
         {
             while (stack.Count > 0)
             {
-                if (title == stack.Peek().Title)
+                if (propertySelector(searchable).CompareTo(propertySelector(stack.Peek())) == 0)
                 {
                     return stack.Pop();
                 }
                 stack.Pop();
             }
-            return null;
+            return default;
         }
     }
 }

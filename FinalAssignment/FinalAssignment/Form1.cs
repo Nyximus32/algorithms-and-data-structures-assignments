@@ -112,32 +112,66 @@ namespace FinalAssignment
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string searchMethod = groupBox2.Controls.OfType<System.Windows.Forms.RadioButton>().FirstOrDefault(r => r.Checked).Text;
             string searchfor = groupBox1.Controls.OfType<System.Windows.Forms.RadioButton>().FirstOrDefault(r => r.Checked).Text;
             if (searchfor.Equals("Title"))
             {
-                Anime animeToCheck = new Anime { Title = textBox1.Text };
-                Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByTitle);
-                if (foundAnime != null)
+                if (searchMethod.Equals("Linear search"))
                 {
-                    richTextBox1.Text = foundAnime.Title;
+                    Anime animeToCheck = new Anime { Title = textBox1.Text };
+                    Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByTitle);
+                    if (foundAnime != null)
+                    {
+                        richTextBox1.Text = foundAnime.Title;
+                    }
+                }
+                else if (searchMethod.Equals("Binary search"))
+                {
+                    //AAAAAAAAA
+                }
+                else
+                {
+                    MessageBox.Show("Select a searching algo");
                 }
             }
             else if (searchfor.Equals("Episode count"))
             {
-                Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
-                Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByEpisodeCount);
-                if (foundAnime != null)
+                if (searchMethod.Equals("Linear search"))
                 {
-                    richTextBox1.Text = foundAnime.Title;
+                    Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
+                    Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByEpisodeCount);
+                    if (foundAnime != null)
+                    {
+                        richTextBox1.Text = foundAnime.Title;
+                    }
+                }
+                else if (searchMethod.Equals("Binary search"))
+                {
+                    //AAAAAAAAA
+                }
+                else
+                {
+                    MessageBox.Show("Select a searching algo");
                 }
             }
             else if (searchfor.Equals("Release date"))
             {
-                Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
-                Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByReleaseDate);
-                if (foundAnime != null)
+                if (searchMethod.Equals("Linear search"))
                 {
-                    richTextBox1.Text = foundAnime.Title;
+                    Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
+                    Anime foundAnime = searchDeez.SearchFor<Anime>(animeArrayList, animeToCheck, sortByReleaseDate);
+                    if (foundAnime != null)
+                    {
+                        richTextBox1.Text = foundAnime.Title;
+                    }
+                }
+                else if (searchMethod.Equals("Binary search"))
+                {
+                    //AAAAAAAAA
+                }
+                else
+                {
+                    MessageBox.Show("Select a searching algo");
                 }
             }
         }
