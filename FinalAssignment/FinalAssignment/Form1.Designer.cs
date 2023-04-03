@@ -154,7 +154,7 @@
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Location = new System.Drawing.Point(356, 183);
+            this.groupBox1.Location = new System.Drawing.Point(687, 183);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -186,7 +186,7 @@
             // 
             this.groupBox2.Controls.Add(this.radioButton5);
             this.groupBox2.Controls.Add(this.radioButton4);
-            this.groupBox2.Location = new System.Drawing.Point(356, 103);
+            this.groupBox2.Location = new System.Drawing.Point(687, 103);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(319, 70);
             this.groupBox2.TabIndex = 7;
@@ -219,7 +219,7 @@
             // 
             this.groupBox3.Controls.Add(this.radioButton6);
             this.groupBox3.Controls.Add(this.radioButton7);
-            this.groupBox3.Location = new System.Drawing.Point(691, 103);
+            this.groupBox3.Location = new System.Drawing.Point(356, 103);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(315, 70);
             this.groupBox3.TabIndex = 8;
@@ -254,7 +254,7 @@
             this.groupBox4.Controls.Add(this.radioButton8);
             this.groupBox4.Controls.Add(this.radioButton9);
             this.groupBox4.Controls.Add(this.radioButton10);
-            this.groupBox4.Location = new System.Drawing.Point(691, 184);
+            this.groupBox4.Location = new System.Drawing.Point(356, 184);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);

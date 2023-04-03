@@ -8,9 +8,7 @@ namespace FinalAssignment
 {
     internal class SearchDeez<T>
     {
-        public SearchDeez() { }
-
-        public int binarySearch(CoolerArrayList<T> arrayList, int low, int high, T x, Func<T, IComparable> propertySelector)
+        public int binarySearch(CoolerArrayList<T> arrayList, int low, int high, T searchable, Func<T, IComparable> propertySelector)
         {
             if (high >= low)
             {
@@ -18,19 +16,19 @@ namespace FinalAssignment
 
                 // If the element is present at the
                 // middle itself
-                if (propertySelector(arrayList[mid]).CompareTo(propertySelector(x)) == 0)
+                if (propertySelector(arrayList[mid]).CompareTo(propertySelector(searchable)) == 0)
                 {
                     return mid;
                 }
 
                 // If element is smaller than mid, then
                 // it can only be present in left subarray
-                if (propertySelector(arrayList[mid]).CompareTo(propertySelector(x)) > 0)
-                    return binarySearch(arrayList, low, mid - 1, x, propertySelector);
+                if (propertySelector(arrayList[mid]).CompareTo(propertySelector(searchable)) > 0)
+                    return binarySearch(arrayList, low, mid - 1, searchable, propertySelector);
 
                 // Else the element can only be present
                 // in right subarray
-                return binarySearch(arrayList, mid + 1, high, x, propertySelector);
+                return binarySearch(arrayList, mid + 1, high, searchable, propertySelector);
             }
 
             // We reach here when element is not present
@@ -38,7 +36,7 @@ namespace FinalAssignment
             return -1;
         }
 
-        public T SearchFor<T>(CoolerArrayList<T> arrayList, T searchable, Func<T, IComparable> propertySelector)
+        public T SearchFor(CoolerArrayList<T> arrayList, T searchable, Func<T, IComparable> propertySelector)
         {
             for (int i = 0; i <= arrayList.Count(); i++)
             {
@@ -51,7 +49,7 @@ namespace FinalAssignment
         }
 
         
-        public T SearchFor<T>(StackBetter<T> stack, T searchable, Func<T, IComparable> propertySelector)
+        public T SearchFor(StackBetter<T> stack, T searchable, Func<T, IComparable> propertySelector)
         {
             while (stack.Count > 0)
             {
