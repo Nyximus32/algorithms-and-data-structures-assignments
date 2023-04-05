@@ -261,7 +261,7 @@
             this.groupBox4.Size = new System.Drawing.Size(315, 174);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Sort by";
+            this.groupBox4.Text = "Sort by:";
             // 
             // button2
             // 

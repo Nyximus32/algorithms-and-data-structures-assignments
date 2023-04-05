@@ -28,7 +28,6 @@ namespace FinalAssignment
             testAnime.Title = "Mushishi";
             LoadJson("animeList.json");
             sortDeez.BubbleSort(animeStack, sortByEpisodeCount);
-            animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByTitle);
             //Anime animee = searchDeez.SearchFor<Anime>(animeArrayList, "Bleach", sortByTitle);
             //sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
             //sortDeez.BubbleSort(animeArrayList, sortByTitle);
@@ -119,6 +118,7 @@ namespace FinalAssignment
                 }
                 else if (searchMethod.Equals("Binary search"))
                 {
+                    animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByTitle);
                     int index = searchDeez.binarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByTitle);
                     if (index != -1)
                     {
@@ -143,8 +143,8 @@ namespace FinalAssignment
                 }
                 else if (searchMethod.Equals("Binary search"))
                 {
+                    animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
                     int index = searchDeez.binarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByEpisodeCount);
-                    richTextBox1.Text = index.ToString();
                     if (index != -1)
                     {
                         richTextBox1.Text = animeArrayList[index].Title;
