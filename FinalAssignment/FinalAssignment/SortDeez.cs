@@ -52,12 +52,12 @@ namespace FinalAssignment
 
             while (i <= j)
             {
-                while (propertySelector(array[i]).CompareTo(propertySelector(pivot)) < 0)
+                while (propertySelector(array[i]) != null && propertySelector(array[i]).CompareTo(propertySelector(pivot)) < 0)
                 {
                     i++;
                 }
 
-                while (propertySelector(array[j]).CompareTo(propertySelector(pivot)) > 0)
+                while (propertySelector(array[j]) != null && propertySelector(array[j]).CompareTo(propertySelector(pivot)) > 0)
                 {
                     j--;
                 }
@@ -81,25 +81,43 @@ namespace FinalAssignment
             return array;
         }
 
-        private int Partition(CoolerArrayList<T> array, int lowIndex, int highIndex, Func<T, IComparable> propertySelector)
+        //Quicksort Stack
+        public StackBetter<T> QuickSort(StackBetter<T> stack, Func<T, IComparable> propertySelector)
         {
-            var pivot = array[highIndex];
-            int i = (lowIndex - 1);
+            if (stack.Count <= 1)
+                return stack;
 
-            for(int j = lowIndex; j <= highIndex; j++)
+            T pivot = stack.Pop();
+
+            StackBetter<T> leftStack = new StackBetter<T>();
+            StackBetter<T> rightStack = new StackBetter<T>();
+
+            while (stack.Count > 0)
             {
-                if (propertySelector(array[j]).CompareTo(propertySelector(pivot)) < 0)
-                {
-                    i++;
-                    var bufferJ = array[j];
-                    array[i] = array[j];
-                    array[j] = bufferJ;
-                }
+                T element = stack.Pop();
+                if (propertySelector(element).CompareTo(propertySelector(pivot)) <= 0)
+                    leftStack.Push(element);
+                else
+                    rightStack.Push(element);
             }
-            var buffer = array[highIndex];
-            array[i + 1] = array[highIndex];
-            array[highIndex] = buffer;
-            return i + 1;
+
+            leftStack = QuickSort(leftStack, propertySelector);
+            rightStack = QuickSort(rightStack, propertySelector);
+
+            //Merge the sorted stacks into the temporary array
+            T[] temp = new T[leftStack.Count + rightStack.Count + 1];
+            int index = 0;
+            while (leftStack.Count > 0)
+                temp[index++] = leftStack.Pop();
+            temp[index++] = pivot;
+            while (rightStack.Count > 0)
+                temp[index++] = rightStack.Pop();
+
+            //Push the sorted elements back onto the stack
+            for (int i = temp.Length - 1; i >= 0; i--)
+                stack.Push(temp[i]);
+
+            return stack;
         }
     }
 }

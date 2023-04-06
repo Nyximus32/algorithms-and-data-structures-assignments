@@ -17,6 +17,12 @@ namespace FinalAssignment
             _size = 0;
         }
 
+        public StackBetter(StackBetter<T> stackBetter)
+        {
+            _array = stackBetter._array;
+            _size = stackBetter._size;
+        }
+
         public int Count
         {
             get { return _size; }
@@ -60,6 +66,19 @@ namespace FinalAssignment
                 throw new InvalidOperationException("Stack is empty");
             }
             return _array[_size - 1];
+        }
+
+        //reverses the stack
+        internal StackBetter<T> Reverse()
+        {
+            StackBetter<T> reversedStack = new StackBetter<T>();
+
+            while (this.Count > 0)
+            {
+                reversedStack.Push(this.Pop());
+            }
+
+            return reversedStack;
         }
     }
 }
