@@ -71,7 +71,7 @@ namespace FinalAssignment
             return -1;
         }
 
-        public int BinarySearch(StackBetter<T> stack, int low, int high, Func<T, IComparable> propertySelector, T searchable)
+        public int BinarySearch(StackBetter<T> stack, int low, int high, T searchable, Func<T, IComparable> propertySelector)
         {
             if (high >= low && stack.Count > 0)
             {
@@ -101,57 +101,60 @@ namespace FinalAssignment
                 if (propertySelector(middleElement).CompareTo(propertySelector(searchable)) > 0)
                 {
                     // Recursively search the left subarray
-                    return BinarySearch(stack, low, mid - 1, propertySelector, searchable);
+                    return BinarySearch(stack, low, mid - 1, searchable, propertySelector);
                 }
 
                 // Else the element can only be present in right subarray
                 // Recursively search the right subarray
-                return BinarySearch(stack, mid + 1, high, propertySelector, searchable);
+                return BinarySearch(stack, mid + 1, high, searchable, propertySelector);
             }
-
             // Element doesn't exist in stack
             return -1;
         }
+        
 
-
-        public T LinearSearch(CoolerArrayList<T> arrayList, T searchable, Func<T, IComparable> propertySelector)
+        public int LinearSearch(CoolerArrayList<T> arrayList, T searchable, Func<T, IComparable> propertySelector)
         {
             for (int i = 0; i <= arrayList.Count(); i++)
             {
                 if (propertySelector(searchable).CompareTo(propertySelector(arrayList[i])) == 0)
                 {
-                    return arrayList[i];
+                    return i;
                 }
             }
-            return default;
+            return -1;
         }
 
         
-        public T LinearSearch(StackBetter<T> stack, T searchable, Func<T, IComparable> propertySelector)
+        public int LinearSearch(StackBetter<T> stack, T searchable, Func<T, IComparable> propertySelector)
         {
+            int counter = 0;
             while (stack.Count > 0)
             {
                 if (propertySelector(searchable).CompareTo(propertySelector(stack.Peek())) == 0)
                 {
-                    return stack.Pop();
+                    return counter;
                 }
                 stack.Pop();
+                counter++;
             }
             return default;
         }
 
-        public T LinearSearch(LinkedListBeyond<T> linkedList, T searchable, Func<T, IComparable> propertySelector)
+        public int LinearSearch(LinkedListBeyond<T> linkedList, T searchable, Func<T, IComparable> propertySelector)
         {
+            int counter = 0;
             LinkedListBeyond<T>.Node current = linkedList.GetHead();
             while (current != null)
             {
                 if (propertySelector(searchable).CompareTo(propertySelector(current.Value)) == 0)
                 {
-                    return current.Value;
+                    return counter;
                 }
                 current = current.Next;
+                counter++;
             }
-            return default;
+            return -1;
         }
     }
 }

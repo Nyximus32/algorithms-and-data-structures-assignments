@@ -37,6 +37,7 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -55,7 +56,7 @@
             this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.radioButton12 = new System.Windows.Forms.RadioButton();
             this.displayLinkList = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.AddFile = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -165,6 +166,15 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search for:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 162);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(217, 16);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "*Release date format : dd/mm/yyyy";
             // 
             // button1
             // 
@@ -382,20 +392,22 @@
             this.displayLinkList.UseVisualStyleBackColor = true;
             this.displayLinkList.Click += new System.EventHandler(this.displayLinkList_Click);
             // 
-            // label3
+            // AddFile
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 162);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(217, 16);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "*Release date format : dd/mm/yyyy";
+            this.AddFile.Location = new System.Drawing.Point(619, 400);
+            this.AddFile.Name = "AddFile";
+            this.AddFile.Size = new System.Drawing.Size(111, 48);
+            this.AddFile.TabIndex = 12;
+            this.AddFile.Text = "Add File";
+            this.AddFile.UseVisualStyleBackColor = true;
+            this.AddFile.Click += new System.EventHandler(this.AddFile_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1085, 473);
+            this.Controls.Add(this.AddFile);
             this.Controls.Add(this.displayLinkList);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -456,6 +468,7 @@
         private System.Windows.Forms.RadioButton radioButton12;
         private System.Windows.Forms.Button displayLinkList;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button AddFile;
     }
 }
 

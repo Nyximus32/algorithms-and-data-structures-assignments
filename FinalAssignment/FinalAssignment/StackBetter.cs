@@ -95,8 +95,10 @@ namespace FinalAssignment
 
         public virtual object Clone()
         {
-            StackBetter<T> stack = new StackBetter<T>(_size);
-            stack._size = _size;
+            StackBetter<T> stack = new StackBetter<T>(_size)
+            {
+                _size = _size
+            };
             Array.Copy(_array, 0, stack._array, 0, _size);
             return stack;
         }
