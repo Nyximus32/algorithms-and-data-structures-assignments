@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static FinalAssignment.Anime;
 
 namespace FinalAssignment
@@ -37,10 +38,36 @@ namespace FinalAssignment
                     if (propertySelector(array[j]).CompareTo(propertySelector(array[j + 1])) > 0)   
                     {
                         // swap temp and array[i]
-                        T temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
+                        (array[j + 1], array[j]) = (array[j], array[j + 1]);
                     }
+        }
+
+        public void BubbleSort(LinkedListBeyond<T> list, Func<T, IComparable> propertySelector)
+        {
+            int count = list.Count;
+            if (count <= 1)
+            {
+                return;
+            }
+
+            bool swapped;
+            do
+            {
+                swapped = false;
+                var current = list.GetHead();
+
+                for (int i = 0; i < count - 1; i++)
+                {
+                    if (propertySelector(current.Value).CompareTo(propertySelector(current.Next.Value)) > 0)
+                    {
+                        (current.Next.Value, current.Value) = (current.Value, current.Next.Value);
+                        swapped = true;
+                    }
+                    current = current.Next;
+                }
+                count--;
+            }
+            while (swapped);
         }
 
         //QUICKSORT ARRAYLIST
@@ -64,9 +91,7 @@ namespace FinalAssignment
 
                 if (i <= j)
                 {
-                    T temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
+                    (array[j], array[i]) = (array[i], array[j]);
                     i++;
                     j--;
                 }
@@ -119,5 +144,51 @@ namespace FinalAssignment
 
             return stack;
         }
+
+        public LinkedListBeyond<T> QuickSort(LinkedListBeyond<T> list, Func<T, IComparable> propertySelector)
+        {
+            if (list == null || list.Count <= 1)
+            {
+                return list;
+            }
+
+            var pivot = list.GetHead().Value;
+            var leftList = new LinkedListBeyond<T>();
+            var rightList = new LinkedListBeyond<T>();
+
+            for (var current = list.GetHead().Next; current != null; current = current.Next)
+            {
+                var currentValue = current.Value;
+                if (propertySelector(currentValue).CompareTo(propertySelector(pivot)) < 0)
+                {
+                    leftList.AddLast(currentValue);
+                }
+                else
+                {
+                    rightList.AddLast(currentValue);
+                }
+            }
+            
+            leftList = QuickSort(leftList, propertySelector);
+            rightList = QuickSort(rightList, propertySelector);
+
+            var result = new LinkedListBeyond<T>();
+            LinkedListBeyond<T>.Node currentNodeL = leftList.GetHead();
+            while (currentNodeL != null)
+            {
+                result.AddLast(currentNodeL.Value);
+                currentNodeL = currentNodeL.Next;
+            }
+            result.AddLast(pivot);
+            LinkedListBeyond<T>.Node currentNodeR = rightList.GetHead();
+            while (currentNodeR != null)
+            {
+                result.AddLast(currentNodeR.Value);
+                currentNodeR = currentNodeR.Next;
+            }
+
+            return result;
+        }
+
     }
 }

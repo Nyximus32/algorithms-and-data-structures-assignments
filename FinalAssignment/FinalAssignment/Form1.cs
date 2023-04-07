@@ -19,6 +19,7 @@ namespace FinalAssignment
         Boolean isSorted = false;
         StackBetter<Anime> animeStack = new StackBetter<Anime>();
         CoolerArrayList<Anime> animeArrayList = new CoolerArrayList<Anime>();
+        LinkedListBeyond<Anime> animeLinkedList = new LinkedListBeyond<Anime>();
         SearchDeez<Anime> searchDeez = new SearchDeez<Anime>();
         SortDeez<Anime> sortDeez = new SortDeez<Anime>();
         Func<Anime, IComparable> sortByEpisodeCount = (anime) => anime.Episodes;
@@ -28,6 +29,7 @@ namespace FinalAssignment
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadJson("animeList.json");
+            //animeLinkedList = sortDeez.QuickSort(animeLinkedList, sortByTitle);
             //sortDeez.BubbleSort(animeStack, sortByEpisodeCount);
             //Anime animee = searchDeez.SearchFor<Anime>(animeArrayList, "Bleach", sortByTitle);
             //sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
@@ -41,35 +43,41 @@ namespace FinalAssignment
                 string json = r.ReadToEnd();
                 items = JsonConvert.DeserializeObject<dynamic>(json);
             }
+            //int counter = 0;
             foreach (dynamic item in items)
             {
-                Anime anime = new Anime
-                {
-                    Title = item.Title,
-                    Link = item.Link,
-                    Score = item.Score,
-                    Type = item.Type,
-                    Episodes = item.Episodes,
-                    Source = item.Source,
-                    Premiered = item.Premiered,
-                    Studios = item.Studios,
-                    Genres = item.Genres,
-                    Themes = item.Themes,
-                    Demographic = item.Demographic,
-                    Duration = item.Duration,
-                    AgeRating = item.AgeRating,
-                    ReviewCount = item.ReviewCount,
-                    Popularity = item.Popularity,
-                    Members = item.Members,
-                    Favorites = item.Favorites,
-                    Adaptation = item.Adaptation,
-                    Sequel = item.Sequel,
-                    Prequel = item.Prequel,
-                    Characters = item.Characters
-                };
-                anime.FixAiredDate(item.AiredDate.ToString());
-                animeStack.Push(anime);
-                animeArrayList.Add(anime);
+                //if(counter < 5)
+                //{
+                    Anime anime = new Anime
+                    {
+                        Title = item.Title,
+                        Link = item.Link,
+                        Score = item.Score,
+                        Type = item.Type,
+                        Episodes = item.Episodes,
+                        Source = item.Source,
+                        Premiered = item.Premiered,
+                        Studios = item.Studios,
+                        Genres = item.Genres,
+                        Themes = item.Themes,
+                        Demographic = item.Demographic,
+                        Duration = item.Duration,
+                        AgeRating = item.AgeRating,
+                        ReviewCount = item.ReviewCount,
+                        Popularity = item.Popularity,
+                        Members = item.Members,
+                        Favorites = item.Favorites,
+                        Adaptation = item.Adaptation,
+                        Sequel = item.Sequel,
+                        Prequel = item.Prequel,
+                        Characters = item.Characters
+                    };
+                    anime.FixAiredDate(item.AiredDate.ToString());
+                    animeStack.Push(anime);
+                    animeArrayList.Add(anime);
+                    animeLinkedList.Add(anime);
+                //}
+                //counter++;
             }
         }
 
@@ -90,25 +98,17 @@ namespace FinalAssignment
         //really weird and finnicky, but its to make sure we keep the original working and just run through copies
         private void displayStack_Click(object sender, EventArgs e)
         {
-            StackBetter<Anime> stackBuffer = new StackBetter<Anime>();
-
             //Create a copy of animeStack that we can iterate over without modifying the original stack
-            StackBetter<Anime> copyStack = new StackBetter<Anime>(animeStack);
+            StackBetter<Anime> copyStack = (StackBetter<Anime>)animeStack.Clone();
 
             //Iterate over the elements of the copyStack and add deep copies of each element to stackBuffer
-            while (copyStack.Count > 0)
-            {
-                Anime anime = copyStack.Pop();
-                stackBuffer.Push(anime);
-            }
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             richTextBox1.Text = "";
-            while (stackBuffer.Count > 0)
+            while (copyStack.Count > 0)
             {
-                Anime anime = stackBuffer.Pop();
-                richTextBox1.Text += anime.Title + "\n";
+                richTextBox1.Text += copyStack.Pop().Title + "\n";
             }
             stopwatch.Stop();
             long elapsed_time = stopwatch.ElapsedMilliseconds;
@@ -148,10 +148,10 @@ namespace FinalAssignment
                     else if (searchMethod.Equals("Binary search"))
                     {
                         animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByTitle);
-                        int index = searchDeez.binarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByTitle);
+                        int index = searchDeez.BinarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByTitle);
                         if (index != -1)
                         {
-                            richTextBox1.Text = animeArrayList[index].Title;
+                            richTextBox1.Text = animeArrayList[index].Title + " was found at index: " + index.ToString();
                         }
                     }
                     //NO SEARCH METHOD SELECTED
@@ -177,10 +177,10 @@ namespace FinalAssignment
                     else if (searchMethod.Equals("Binary search"))
                     {
                         animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
-                        int index = searchDeez.binarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByEpisodeCount);
+                        int index = searchDeez.BinarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByEpisodeCount);
                         if (index != -1)
                         {
-                            richTextBox1.Text = animeArrayList[index].Title;
+                            richTextBox1.Text = animeArrayList[index].Title + " was found at index: " + index.ToString();
                         }
                     }
                     //NO SEARCH METHOD SELECTED
@@ -205,11 +205,10 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        int index = searchDeez.binarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByReleaseDate);
+                        int index = searchDeez.BinarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByReleaseDate);
                         if (index != -1)
                         {
-                            richTextBox1.Text = animeArrayList[index].Title;
-                            richTextBox1.Text = index.ToString();
+                            richTextBox1.Text = animeArrayList[index].Title + " was found at index: " + index.ToString();
                         }
                     }
                     //NO SEARCH METHOD SELECTED
@@ -220,6 +219,7 @@ namespace FinalAssignment
                 }
             } else if (searchStructure.Equals("Stack"))
             {
+                StackBetter<Anime> copyStack = (StackBetter<Anime>)animeStack.Clone();
                 //TITLE
                 if (searchfor.Equals("Title"))
                 {
@@ -227,7 +227,7 @@ namespace FinalAssignment
                     Anime animeToCheck = new Anime { Title = textBox1.Text };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(animeStack, animeToCheck, sortByTitle);
+                        Anime foundAnime = searchDeez.SearchFor(copyStack, animeToCheck, sortByTitle);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -236,10 +236,14 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        int index = searchDeez.binarySearch(animeStack, 0, animeStack.Count, sortByTitle, animeToCheck);
+                        int index = searchDeez.BinarySearch(copyStack, 0, animeStack.Count, sortByTitle, animeToCheck);
                         if (index != -1)
                         {
-                            richTextBox1.Text = animeArrayList[index].Title;
+                            richTextBox1.Text = "Anime found at index:" + index.ToString();
+                        }
+                        else
+                        {
+                            richTextBox1.Text = "Anime doesn't exist";
                         }
                     }
                     //NO SEARCH METHOD SELECTED
@@ -255,7 +259,7 @@ namespace FinalAssignment
                     Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(animeStack, animeToCheck, sortByEpisodeCount);
+                        Anime foundAnime = searchDeez.SearchFor(copyStack, animeToCheck, sortByEpisodeCount);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -264,10 +268,14 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        int index = searchDeez.binarySearch(animeStack, 0, animeStack.Count, sortByEpisodeCount, animeToCheck);
+                        int index = searchDeez.BinarySearch(copyStack, 0, animeStack.Count, sortByEpisodeCount, animeToCheck);
                         if (index != -1)
                         {
-                            richTextBox1.Text = animeArrayList[index].Title;
+                            richTextBox1.Text = "Anime found at index:" + index.ToString();
+                        }
+                        else
+                        {
+                            richTextBox1.Text = "Anime doesn't exist";
                         }
                     }
                     //NO SEARCH METHOD SELECTED
@@ -283,7 +291,7 @@ namespace FinalAssignment
                     Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(animeStack, animeToCheck, sortByReleaseDate);
+                        Anime foundAnime = searchDeez.SearchFor(copyStack, animeToCheck, sortByReleaseDate);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -292,10 +300,14 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        int index = searchDeez.binarySearch(animeStack, 0, animeStack.Count, sortByReleaseDate, animeToCheck);
+                        int index = searchDeez.BinarySearch(copyStack, 0, animeStack.Count, sortByReleaseDate, animeToCheck);
                         if (index != -1)
                         {
-                            richTextBox1.Text = animeArrayList[index].Title;
+                            richTextBox1.Text = "Anime found at index:" + index.ToString();
+                        }
+                        else
+                        {
+                            richTextBox1.Text = "Anime doesn't exist";
                         }
                     }
                     //NO SEARCH METHOD SELECTED
@@ -304,6 +316,10 @@ namespace FinalAssignment
                         MessageBox.Show("Select a searching algo");
                     }
                 }
+            }
+            else if (searchStructure.Equals("LinkedList")) 
+            {
+                
             }
             
         }
@@ -327,6 +343,7 @@ namespace FinalAssignment
                         {
                             sortDeez.BubbleSort(animeArrayList, sortByTitle);
                             isSorted = true;
+                            displayArrList_Click(sender, e);
                         }
                         else
                         {
@@ -357,13 +374,14 @@ namespace FinalAssignment
                 else if (sortfor.Equals("Episode count"))
                 {
                     //BUBBLE SORT
-                    Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
+                    //Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
                     if (sortMethod.Equals("Bubble sort"))
                     {
                         if (animeArrayList != null)
                         {
                             sortDeez.BubbleSort(animeArrayList, sortByEpisodeCount);
                             isSorted = true;
+                            displayArrList_Click(sender, e);
                         }
                         else
                         {
@@ -375,7 +393,7 @@ namespace FinalAssignment
                     {
                         if (animeArrayList != null)
                         {
-                            animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Capacity, sortByEpisodeCount);
+                            animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
                             isSorted = true;
                             displayArrList_Click(sender, e);
                         }
@@ -394,13 +412,14 @@ namespace FinalAssignment
                 else if (sortfor.Equals("Release date"))
                 {
                     //BUBBLE SORT
-                    Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
+                    //Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
                     if (sortMethod.Equals("Bubble sort"))
                     {
                         if (animeArrayList != null)
                         {
-                            sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Capacity, sortByReleaseDate);
+                            sortDeez.BubbleSort(animeArrayList, sortByReleaseDate);
                             isSorted = true;
+                            displayArrList_Click(sender, e);
                         }
                         else
                         {
@@ -412,7 +431,7 @@ namespace FinalAssignment
                     {
                         if (animeArrayList != null)
                         {
-                            animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Capacity, sortByReleaseDate);
+                            animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByReleaseDate);
                             isSorted = true;
                             displayArrList_Click(sender, e);
                         }
@@ -507,7 +526,7 @@ namespace FinalAssignment
                 else if (sortfor.Equals("Release date"))
                 {
                     //BUBBLE SORT
-                    Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
+                    //Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
                     if (sortMethod.Equals("Bubble sort"))
                     {
                         if (animeStack != null)
@@ -542,7 +561,138 @@ namespace FinalAssignment
                     }
                 }
             }
+            else if (searchStructure.Equals("LinkedList"))
+            {
+                //TITLE
+                if (sortfor.Equals("Title"))
+                {
+                    //BUBBLE SORT
+                    if (sortMethod.Equals("Bubble sort"))
+                    {
+                        if (sortDeez != null)
+                        {
+                            sortDeez.BubbleSort(animeLinkedList, sortByTitle);
+                            isSorted = true;
+                            displayLinkList_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("LinkedList is null");
+                        }
+                    }
+                    //QUICK SORT
+                    else if (sortMethod.Equals("Quick sort"))
+                    {
+                        if (sortDeez != null)
+                        {
+                            animeLinkedList = sortDeez.QuickSort(animeLinkedList, sortByTitle);
+                            isSorted = true;
+                            displayLinkList_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("LinkedList is null");
+                        }
+                    }
+                    //NO SORT METHOD SELECTED
+                    else
+                    {
+                        MessageBox.Show("Select a sorting algo");
+                    }
+                }
+                //EPISODE COUNT
+                else if (sortfor.Equals("Episode count"))
+                {
+                    //BUBBLE SORT
+                    //Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
+                    if (sortMethod.Equals("Bubble sort"))
+                    {
+                        if (sortDeez != null)
+                        {
+                            sortDeez.BubbleSort(animeLinkedList, sortByEpisodeCount);
+                            isSorted = true;
+                            displayLinkList_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("LinkedList is null");
+                        }
+                    }
+                    //QUICK SORT
+                    else if (sortMethod.Equals("Quick sort"))
+                    {
+                        if (sortDeez != null)
+                        {
+                            animeLinkedList = sortDeez.QuickSort(animeLinkedList, sortByEpisodeCount);
+                            isSorted = true;
+                            displayLinkList_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("LinkedList is null");
+                        }
+                    }
+                    //NO SEARCH METHOD SELECTED
+                    else
+                    {
+                        MessageBox.Show("Select a sorting algo");
+                    }
+                }
+                //RELEASE DATE
+                else if (sortfor.Equals("Release date"))
+                {
+                    //BUBBLE SORT
+                    //Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
+                    if (sortMethod.Equals("Bubble sort"))
+                    {
+                        if (sortDeez != null)
+                        {
+                            sortDeez.BubbleSort(animeLinkedList, sortByReleaseDate);
+                            isSorted = true;
+                            displayLinkList_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("LinkedList is null");
+                        }
+                    }
+                    //QUICK SORT
+                    else if (sortMethod.Equals("Quick sort"))
+                    {
+                        if (sortDeez != null)
+                        {
+                            animeLinkedList = sortDeez.QuickSort(animeLinkedList, sortByReleaseDate);
+                            isSorted = true;
+                            displayLinkList_Click(sender, e);
+                        }
+                        else
+                        {
+                            MessageBox.Show("LinkedList is null");
+                        }
+                    }
+                    //NO SEARCH METHOD SELECTED
+                    else
+                    {
+                        MessageBox.Show("Select a sorting algo");
+                    }
+                }
+            }
         }
-            
+
+        private void displayLinkList_Click(object sender, EventArgs e)
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            richTextBox1.Text = "";
+            LinkedListBeyond<Anime>.Node currentNode = animeLinkedList.GetHead();
+            while (currentNode != null)
+            {
+                richTextBox1.Text += currentNode.Value.Title.ToString() + Environment.NewLine;
+                currentNode = currentNode.Next;
+            }
+            stopwatch.Stop();
+            long elapsed_time = stopwatch.ElapsedMilliseconds;
+            label1.Text = elapsed_time.ToString() + " miliseconds";
+        }
     }
 }

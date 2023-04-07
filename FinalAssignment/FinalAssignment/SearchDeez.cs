@@ -8,7 +8,7 @@ namespace FinalAssignment
 {
     internal class SearchDeez<T>
     {
-        public int binarySearch(CoolerArrayList<T> arrayList, int low, int high, T searchable, Func<T, IComparable> propertySelector)
+        public int BinarySearch(CoolerArrayList<T> arrayList, int low, int high, T searchable, Func<T, IComparable> propertySelector)
         {
             if (high >= low)
             {
@@ -24,11 +24,11 @@ namespace FinalAssignment
                 //If element is smaller than mid, then
                 //it can only be present in left subarray
                 if (propertySelector(arrayList[mid]).CompareTo(propertySelector(searchable)) > 0)
-                    return binarySearch(arrayList, low, mid - 1, searchable, propertySelector);
+                    return BinarySearch(arrayList, low, mid - 1, searchable, propertySelector);
 
                 //Else the element can only be present
                 //in right subarray
-                return binarySearch(arrayList, mid + 1, high, searchable, propertySelector);
+                return BinarySearch(arrayList, mid + 1, high, searchable, propertySelector);
             }
 
             //We reach here when element is not present
@@ -36,38 +36,45 @@ namespace FinalAssignment
             return -1;
         }
 
-        public int binarySearch(StackBetter<T> stack, int low, int high, Func<T, IComparable> propertySelector, T searchable)
+        public int BinarySearch(StackBetter<T> stack, int low, int high, Func<T, IComparable> propertySelector, T searchable)
         {
-            if (high >= low)
+            if (high >= low && stack.Count > 0)
             {
                 int mid = low + (high - low) / 2;
 
-                //If the element is the middle element
-                if (propertySelector(stack.Peek()).CompareTo(propertySelector(searchable)) == 0)
+                // Get the middle element of the stack
+                StackBetter<T> tempStack = new StackBetter<T>();
+                for (int i = 0; i < mid; i++)
                 {
-                    return mid;
+                    tempStack.Push(stack.Pop());
+                }
+                T middleElement = stack.Peek();
+                while (tempStack.Count > 0)
+                {
+                    stack.Push(tempStack.Pop());
                 }
 
-                //If element smaller than mid then its on the left
-                if (propertySelector(stack.Peek()).CompareTo(propertySelector(searchable)) > 0)
+                // If the element is the middle element
+                if (propertySelector(middleElement).CompareTo(propertySelector(searchable)) == 0)
                 {
-                    //Pop the top element and recursively search the left subarray
-                    stack.Pop();
-                    int result = binarySearch(stack, low, mid - 1, propertySelector, searchable);
-                    stack.Push(searchable); // Push the top element back onto the stack
-                    return result;
+                    // Calculate the index of the found element in the original stack
+                    int index = stack.Count - mid - 1;
+                    return index;
                 }
 
-                //Else the element on the right
-                //Pop top element and search the right subarray
-                stack.Pop();
-                int result2 = binarySearch(stack, mid + 1, high, propertySelector, searchable);
-                //Put the top element back
-                stack.Push(searchable); 
-                return result2;
+                // If element is smaller than mid, then it can only be present in left subarray
+                if (propertySelector(middleElement).CompareTo(propertySelector(searchable)) > 0)
+                {
+                    // Recursively search the left subarray
+                    return BinarySearch(stack, low, mid - 1, propertySelector, searchable);
+                }
+
+                // Else the element can only be present in right subarray
+                // Recursively search the right subarray
+                return BinarySearch(stack, mid + 1, high, propertySelector, searchable);
             }
 
-            //Element doesnt exist in stack
+            // Element doesn't exist in stack
             return -1;
         }
 

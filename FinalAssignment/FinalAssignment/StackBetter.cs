@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinalAssignment
 {
@@ -21,6 +17,22 @@ namespace FinalAssignment
         {
             _array = stackBetter._array;
             _size = stackBetter._size;
+        }
+
+        public StackBetter(int initialCapacity)
+        {
+            if (initialCapacity < 0)
+            {
+                throw new ArgumentOutOfRangeException("Specify a positive number");
+            }
+
+            if (initialCapacity < 10)
+            {
+                initialCapacity = 10;
+            }
+
+            _array = new T[initialCapacity];
+            _size = 0;
         }
 
         public int Count
@@ -79,6 +91,14 @@ namespace FinalAssignment
             }
 
             return reversedStack;
+        }
+
+        public virtual object Clone()
+        {
+            StackBetter<T> stack = new StackBetter<T>(_size);
+            stack._size = _size;
+            Array.Copy(_array, 0, stack._array, 0, _size);
+            return stack;
         }
     }
 }
