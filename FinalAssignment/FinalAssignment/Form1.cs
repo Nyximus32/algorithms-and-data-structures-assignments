@@ -84,7 +84,7 @@ namespace FinalAssignment
             stopwatch.Restart();
             DisplayArrayList();
             stopwatch.Stop();
-            GetEpapsedTime();
+            GetElapsedTime();
         }
 
         public void DisplayArrayList()
@@ -101,7 +101,7 @@ namespace FinalAssignment
             stopwatch.Restart();
             DisplayStack();
             stopwatch.Stop();
-            GetEpapsedTime();
+            GetElapsedTime();
         }
 
         private void DisplayStack()
@@ -119,7 +119,7 @@ namespace FinalAssignment
             stopwatch.Restart();
             DisplayLinkedList();
             stopwatch.Stop();
-            GetEpapsedTime();
+            GetElapsedTime();
         }
 
         private void DisplayLinkedList()
@@ -133,23 +133,35 @@ namespace FinalAssignment
             }
         }
 
-        private void GetEpapsedTime()
+        private void GetElapsedTime()
         {
-            long elapsed_time = stopwatch.ElapsedMilliseconds;
-            label1.Text = "Elapsed time: " + elapsed_time.ToString() + " miliseconds";
+            double elapsed_time = stopwatch.ElapsedMilliseconds;
+            elapsed_time = elapsed_time / 1000;
+            label1.Text = "Elapsed time: " + elapsed_time.ToString("F1") + " seconds";
         }
+
         //searches through the structure for a specific thing
         private void searchButton(object sender, EventArgs e)
         {
-            //the method that will be used to search, and the thing we are looking for
-            string searchMethod = groupBox2.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
-            string searchfor = groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
-            string searchStructure = groupBox5.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+            string searchMethod;
+            string searchFor;
+            string searchStructure;
+            try
+            { 
+                //the method that will be used to search, and the thing we are looking for
+                searchMethod = groupBox2.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+                searchFor = groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+                searchStructure = groupBox5.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+            } catch
+            {
+                MessageBox.Show("Please select all the options");
+                return;
+            }
 
             if (searchStructure.Equals("ArrayList"))
             {
                 //TITLE
-                if (searchfor.Equals("Title"))
+                if (searchFor.Equals("Title"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { Title = textBox1.Text };
@@ -162,7 +174,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -178,7 +190,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -192,7 +204,7 @@ namespace FinalAssignment
                     }
                 }
                 //EPISODE COUNT
-                else if (searchfor.Equals("Episode count"))
+                else if (searchFor.Equals("Episode count"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
@@ -205,7 +217,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -221,7 +233,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -235,7 +247,7 @@ namespace FinalAssignment
                     }
                 }
                 //RELEASE DATE
-                else if (searchfor.Equals("Release date"))
+                else if (searchFor.Equals("Release date"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { AiredDate = DateTime.Parse(textBox1.Text) };
@@ -248,7 +260,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -264,7 +276,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -280,7 +292,7 @@ namespace FinalAssignment
             }
             else if (searchStructure.Equals("LinkedList"))
             {
-                if (searchfor.Equals("Title"))
+                if (searchFor.Equals("Title"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { Title = textBox1.Text };
@@ -293,7 +305,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -309,7 +321,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -323,7 +335,7 @@ namespace FinalAssignment
                     }
                 }
                 //EPISODE COUNT
-                else if (searchfor.Equals("Episode count"))
+                else if (searchFor.Equals("Episode count"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
@@ -336,7 +348,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -352,7 +364,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -366,7 +378,7 @@ namespace FinalAssignment
                     }
                 }
                 //RELEASE DATE
-                else if (searchfor.Equals("Release date"))
+                else if (searchFor.Equals("Release date"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { AiredDate = DateTime.Parse(textBox1.Text) };
@@ -379,7 +391,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -395,7 +407,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -413,7 +425,7 @@ namespace FinalAssignment
             {
                 StackBetter<Anime> copyStack = (StackBetter<Anime>)animeStack.Clone();
                 //TITLE
-                if (searchfor.Equals("Title"))
+                if (searchFor.Equals("Title"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { Title = textBox1.Text };
@@ -426,7 +438,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -442,7 +454,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -456,7 +468,7 @@ namespace FinalAssignment
                     }
                 }
                 //EPISODE COUNT
-                else if (searchfor.Equals("Episode count"))
+                else if (searchFor.Equals("Episode count"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
@@ -469,7 +481,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -485,7 +497,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -499,7 +511,7 @@ namespace FinalAssignment
                     }
                 }
                 //RELEASE DATE
-                else if (searchfor.Equals("Release date"))
+                else if (searchFor.Equals("Release date"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { AiredDate = DateTime.Parse(textBox1.Text) };
@@ -512,7 +524,7 @@ namespace FinalAssignment
                         if (foundAnimeIndex != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + foundAnimeIndex.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -528,7 +540,7 @@ namespace FinalAssignment
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime was found at index: " + index.ToString();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                         }
                         else
                         {
@@ -551,10 +563,22 @@ namespace FinalAssignment
 
         private void SortButton(object sender, EventArgs e)
         {
-            //the method that will be used to search, and the thing we are looking for
-            string sortMethod = groupBox3.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
-            string sortfor = groupBox4.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
-            string searchStructure = groupBox5.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+            string sortMethod;
+            string sortfor;
+            string searchStructure;
+
+            //checks if they are all filled in else stop the method
+            try
+            {
+                //the method that will be used to search, and the thing we are looking for
+                sortMethod = groupBox3.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+                sortfor = groupBox4.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+                searchStructure = groupBox5.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Text;
+            } catch
+            {
+                MessageBox.Show("Select one of each option");
+                return;
+            }
 
             if (searchStructure.Equals("ArrayList"))
             {
@@ -569,7 +593,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeArrayList, CompareTitle);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayArrayList();
                         }
                         else
@@ -585,7 +609,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, CompareTitle);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayArrayList();
                         }
                         else
@@ -611,7 +635,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeArrayList, CompareEpisodeCount);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayArrayList();
                         }
                         else
@@ -627,7 +651,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, CompareEpisodeCount);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayArrayList();
                         }
                         else
@@ -653,7 +677,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeArrayList, CompareReleaseDate);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayArrayList();
                         }
                         else
@@ -669,7 +693,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, CompareReleaseDate);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayArrayList();
                         }
                         else
@@ -697,7 +721,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeStack, CompareTitle);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayStack();
                         }
                         else
@@ -713,7 +737,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeStack = sortDeez.QuickSort(animeStack, CompareTitle);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayStack();
                         }
                         else
@@ -738,7 +762,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeStack, CompareEpisodeCount);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayStack();
                         }
                         else
@@ -754,7 +778,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeStack = sortDeez.QuickSort(animeStack, CompareEpisodeCount);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayStack();
                         }
                         else
@@ -780,7 +804,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeStack, CompareReleaseDate);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayStack();
                         }
                         else
@@ -796,7 +820,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeStack = sortDeez.QuickSort(animeStack, CompareReleaseDate);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayStack();
                         }
                         else
@@ -824,7 +848,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeLinkedList, CompareTitle);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayLinkedList();
                         }
                         else
@@ -840,7 +864,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeLinkedList = sortDeez.QuickSort(animeLinkedList, CompareTitle);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayLinkedList();
                         }
                         else
@@ -866,7 +890,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeLinkedList, CompareEpisodeCount);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayLinkedList();
                         }
                         else
@@ -882,7 +906,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeLinkedList = sortDeez.QuickSort(animeLinkedList, CompareEpisodeCount);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayLinkedList();
                         }
                         else
@@ -908,7 +932,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             sortDeez.BubbleSort(animeLinkedList, CompareReleaseDate);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayLinkedList();
                         }
                         else
@@ -924,7 +948,7 @@ namespace FinalAssignment
                             stopwatch.Restart();
                             animeLinkedList = sortDeez.QuickSort(animeLinkedList, CompareReleaseDate);
                             stopwatch.Stop();
-                            GetEpapsedTime();
+                            GetElapsedTime();
                             DisplayLinkedList();
                         }
                         else
