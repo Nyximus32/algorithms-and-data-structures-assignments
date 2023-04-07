@@ -46,38 +46,34 @@ namespace FinalAssignment
             //int counter = 0;
             foreach (dynamic item in items)
             {
-                //if(counter < 5)
-                //{
-                    Anime anime = new Anime
-                    {
-                        Title = item.Title,
-                        Link = item.Link,
-                        Score = item.Score,
-                        Type = item.Type,
-                        Episodes = item.Episodes,
-                        Source = item.Source,
-                        Premiered = item.Premiered,
-                        Studios = item.Studios,
-                        Genres = item.Genres,
-                        Themes = item.Themes,
-                        Demographic = item.Demographic,
-                        Duration = item.Duration,
-                        AgeRating = item.AgeRating,
-                        ReviewCount = item.ReviewCount,
-                        Popularity = item.Popularity,
-                        Members = item.Members,
-                        Favorites = item.Favorites,
-                        Adaptation = item.Adaptation,
-                        Sequel = item.Sequel,
-                        Prequel = item.Prequel,
-                        Characters = item.Characters
-                    };
-                    anime.FixAiredDate(item.AiredDate.ToString());
-                    animeStack.Push(anime);
-                    animeArrayList.Add(anime);
-                    animeLinkedList.Add(anime);
-                //}
-                //counter++;
+                Anime anime = new Anime
+                {
+                    Title = item.Title,
+                    Link = item.Link,
+                    Score = item.Score,
+                    Type = item.Type,
+                    Episodes = item.Episodes,
+                    Source = item.Source,
+                    Premiered = item.Premiered,
+                    Studios = item.Studios,
+                    Genres = item.Genres,
+                    Themes = item.Themes,
+                    Demographic = item.Demographic,
+                    Duration = item.Duration,
+                    AgeRating = item.AgeRating,
+                    ReviewCount = item.ReviewCount,
+                    Popularity = item.Popularity,
+                    Members = item.Members,
+                    Favorites = item.Favorites,
+                    Adaptation = item.Adaptation,
+                    Sequel = item.Sequel,
+                    Prequel = item.Prequel,
+                    Characters = item.Characters
+                };
+                anime.FixAiredDate(item.AiredDate.ToString());
+                animeStack.Push(anime);
+                animeArrayList.Add(anime);
+                animeLinkedList.Add(anime);
             }
         }
 
@@ -138,7 +134,7 @@ namespace FinalAssignment
                     Anime animeToCheck = new Anime { Title = textBox1.Text };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(animeArrayList, animeToCheck, sortByTitle);
+                        Anime foundAnime = searchDeez.LinearSearch(animeArrayList, animeToCheck, sortByTitle);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -147,7 +143,7 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByTitle);
+                        //animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByTitle);
                         int index = searchDeez.BinarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByTitle);
                         if (index != -1)
                         {
@@ -167,7 +163,7 @@ namespace FinalAssignment
                     Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(animeArrayList, animeToCheck, sortByEpisodeCount);
+                        Anime foundAnime = searchDeez.LinearSearch(animeArrayList, animeToCheck, sortByEpisodeCount);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -176,7 +172,7 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
+                        //animeArrayList = sortDeez.QuickSort(animeArrayList, 0, animeArrayList.Count() - 1, sortByEpisodeCount);
                         int index = searchDeez.BinarySearch(animeArrayList, 0, animeArrayList.Count(), animeToCheck, sortByEpisodeCount);
                         if (index != -1)
                         {
@@ -193,10 +189,10 @@ namespace FinalAssignment
                 else if (searchfor.Equals("Release date"))
                 {
                     //LINEAR SEARCH
-                    Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
+                    Anime animeToCheck = new Anime { AiredDate = DateTime.Parse(textBox1.Text) };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(animeArrayList, animeToCheck, sortByReleaseDate);
+                        Anime foundAnime = searchDeez.LinearSearch(animeArrayList, animeToCheck, sortByReleaseDate);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -217,17 +213,16 @@ namespace FinalAssignment
                         MessageBox.Show("Select a searching algo");
                     }
                 }
-            } else if (searchStructure.Equals("Stack"))
+            }
+            else if (searchStructure.Equals("LinkedList"))
             {
-                StackBetter<Anime> copyStack = (StackBetter<Anime>)animeStack.Clone();
-                //TITLE
                 if (searchfor.Equals("Title"))
                 {
                     //LINEAR SEARCH
                     Anime animeToCheck = new Anime { Title = textBox1.Text };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(copyStack, animeToCheck, sortByTitle);
+                        Anime foundAnime = searchDeez.LinearSearch(animeLinkedList, animeToCheck, sortByTitle);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -236,7 +231,7 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        int index = searchDeez.BinarySearch(copyStack, 0, animeStack.Count, sortByTitle, animeToCheck);
+                        int index = searchDeez.BinarySearch(animeLinkedList, 0, animeLinkedList.Count, animeToCheck, sortByTitle);
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime found at index:" + index.ToString();
@@ -259,7 +254,7 @@ namespace FinalAssignment
                     Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(copyStack, animeToCheck, sortByEpisodeCount);
+                        Anime foundAnime = searchDeez.LinearSearch(animeLinkedList, animeToCheck, sortByEpisodeCount);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -268,7 +263,7 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        int index = searchDeez.BinarySearch(copyStack, 0, animeStack.Count, sortByEpisodeCount, animeToCheck);
+                        int index = searchDeez.BinarySearch(animeLinkedList, 0, animeLinkedList.Count, animeToCheck, sortByEpisodeCount);
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime found at index:" + index.ToString();
@@ -288,10 +283,10 @@ namespace FinalAssignment
                 else if (searchfor.Equals("Release date"))
                 {
                     //LINEAR SEARCH
-                    Anime animeToCheck = new Anime { AiredDate = Convert.ToDateTime(textBox1.Text) };
+                    Anime animeToCheck = new Anime { AiredDate = DateTime.Parse(textBox1.Text) };
                     if (searchMethod.Equals("Linear search"))
                     {
-                        Anime foundAnime = searchDeez.SearchFor(copyStack, animeToCheck, sortByReleaseDate);
+                        Anime foundAnime = searchDeez.LinearSearch(animeLinkedList, animeToCheck, sortByReleaseDate);
                         if (foundAnime != null)
                         {
                             richTextBox1.Text = foundAnime.Title;
@@ -300,7 +295,107 @@ namespace FinalAssignment
                     //BINARY SEARCH
                     else if (searchMethod.Equals("Binary search"))
                     {
-                        int index = searchDeez.BinarySearch(copyStack, 0, animeStack.Count, sortByReleaseDate, animeToCheck);
+                        int index = searchDeez.BinarySearch(animeLinkedList, 0, animeLinkedList.Count, animeToCheck, sortByReleaseDate);
+                        if (index != -1)
+                        {
+                            richTextBox1.Text = "Anime found at index:" + index.ToString();
+                        }
+                        else
+                        {
+                            richTextBox1.Text = "Anime doesn't exist";
+                        }
+                    }
+                    //NO SEARCH METHOD SELECTED
+                    else
+                    {
+                        MessageBox.Show("Select a searching algo");
+                    }
+                }
+            }
+            else if (searchStructure.Equals("Stack"))
+            {
+                StackBetter<Anime> copyStack = (StackBetter<Anime>)animeStack.Clone();
+                //TITLE
+                if (searchfor.Equals("Title"))
+                {
+                    //LINEAR SEARCH
+                    Anime animeToCheck = new Anime { Title = textBox1.Text };
+                    if (searchMethod.Equals("Linear search"))
+                    {
+                        Anime foundAnime = searchDeez.LinearSearch(animeLinkedList, animeToCheck, sortByTitle);
+                        if (foundAnime != null)
+                        {
+                            richTextBox1.Text = foundAnime.Title;
+                        }
+                    }
+                    //BINARY SEARCH
+                    else if (searchMethod.Equals("Binary search"))
+                    {
+                        int index = searchDeez.BinarySearch(animeLinkedList, 0, animeLinkedList.Count, animeToCheck, sortByTitle);
+                        if (index != -1)
+                        {
+                            richTextBox1.Text = "Anime found at index:" + index.ToString();
+                        }
+                        else
+                        {
+                            richTextBox1.Text = "Anime doesn't exist";
+                        }
+                    }
+                    //NO SEARCH METHOD SELECTED
+                    else
+                    {
+                        MessageBox.Show("Select a searching algo");
+                    }
+                }
+                //EPISODE COUNT
+                else if (searchfor.Equals("Episode count"))
+                {
+                    //LINEAR SEARCH
+                    Anime animeToCheck = new Anime { Episodes = int.Parse(textBox1.Text) };
+                    if (searchMethod.Equals("Linear search"))
+                    {
+                        Anime foundAnime = searchDeez.LinearSearch(animeLinkedList, animeToCheck, sortByEpisodeCount);
+                        if (foundAnime != null)
+                        {
+                            richTextBox1.Text = foundAnime.Title;
+                        }
+                    }
+                    //BINARY SEARCH
+                    else if (searchMethod.Equals("Binary search"))
+                    {
+                        int index = searchDeez.BinarySearch(animeLinkedList, 0, animeLinkedList.Count, animeToCheck, sortByEpisodeCount);
+                        if (index != -1)
+                        {
+                            richTextBox1.Text = "Anime found at index:" + index.ToString();
+                        }
+                        else
+                        {
+                            richTextBox1.Text = "Anime doesn't exist";
+                        }
+                    }
+                    //NO SEARCH METHOD SELECTED
+                    else
+                    {
+                        MessageBox.Show("Select a searching algo");
+                    }
+                }
+                //RELEASE DATE
+                else if (searchfor.Equals("Release date"))
+                {
+                    //LINEAR SEARCH
+                    Anime animeToCheck = new Anime { AiredDate = DateTime.Parse(textBox1.Text) };
+                    if (searchMethod.Equals("Linear search"))
+                    {
+                        Anime foundAnime = searchDeez.LinearSearch(animeLinkedList, animeToCheck, sortByReleaseDate);
+                        if (foundAnime != null)
+                        {
+                            richTextBox1.Text = foundAnime.Title;
+                        }
+                    }
+                    //BINARY SEARCH
+                    else if (searchMethod.Equals("Binary search"))
+                    {
+                        int index = searchDeez.BinarySearch(animeLinkedList, 0, animeStack.Count, animeToCheck, sortByReleaseDate);
                         if (index != -1)
                         {
                             richTextBox1.Text = "Anime found at index:" + index.ToString();
